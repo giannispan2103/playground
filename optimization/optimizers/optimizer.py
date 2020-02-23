@@ -2,7 +2,11 @@ from utils import get_distance
 
 
 class Optimizer(object):
-    def __init__(self, iterations: int, init_x: float, init_y: float, func: callable, lr: float) -> None:
+    def __init__(self, iterations: int,
+                 init_x: float,
+                 init_y: float,
+                 func: callable,
+                 lr: float) -> None:
         self.init_x = init_x
         self.init_y = init_y
         self.iterations = iterations
@@ -23,11 +27,13 @@ class Optimizer(object):
             self.step()
             self.current_iteration = it
 
-    def distance(self, target_x: float, target_y: float) -> float:
+    def distance(self,
+                 target_x: float,
+                 target_y: float) -> float:
         return get_distance(self.x, self.y, target_x, target_y)
 
     def decay_policy(self) -> None:
         pass
 
-    def cyclical_decay(self) -> None:
+    def cyclical_learning_rate(self) -> None:
         pass

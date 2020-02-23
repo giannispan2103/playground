@@ -3,10 +3,14 @@ from utils import momentum_step
 
 
 class Momentum(Optimizer):
-    def __init__(self, iterations: int,
-                 init_x: float, init_y: float,
+    def __init__(self,
+                 iterations: int,
+                 init_x: float,
+                 init_y: float,
                  func: callable,
-                 lr: float, gamma: float = 0.9, nesterov: bool = False) -> None:
+                 lr: float,
+                 gamma: float,
+                 nesterov: bool) -> None:
         super(Momentum, self).__init__(iterations=iterations, init_x=init_x, init_y=init_y, func=func, lr=lr)
         self.gamma = gamma
         self.vx = 0.0

@@ -3,12 +3,14 @@ from utils import adadelta_step
 
 
 class Adadelta(Optimizer):
-    def __init__(self, iterations: int,
-                 init_x: float, init_y: float,
+    def __init__(self,
+                 iterations: int,
+                 init_x: float,
+                 init_y: float,
                  func: callable,
                  gamma: float,
-                 lr: float = 1.0,
-                 epsilon: float = 0.00000001) -> None:
+                 epsilon: float,
+                 lr: float = 1.0) -> None:
         super(Adadelta, self).__init__(iterations=iterations, init_x=init_x, init_y=init_y, func=func, lr=lr)
         self.epsilon = epsilon
         self.gamma = gamma
@@ -20,12 +22,15 @@ class Adadelta(Optimizer):
         self.y_ma = init_y
 
     def step(self) -> None:
-        self.x, self.y, self.dx, self.dy, self.dx_ma, self.dy_ma = adadelta_step(func=self.func, x=self.x, y=self.y,
+        self.x, self.y, self.dx, self.dy, self.dx_ma, self.dy_ma = adadelta_step(func=self.func,
+                                                                                 x=self.x,
+                                                                                 y=self.y,
                                                                                  dx_ma=self.dx_ma,
                                                                                  dy_ma=self.dy_ma,
                                                                                  x_ma=self.x_ma,
                                                                                  y_ma=self.y_ma,
-                                                                                 epsilon=self.epsilon, gamma=self.gamma,
+                                                                                 epsilon=self.epsilon,
+                                                                                 gamma=self.gamma,
                                                                                  lr=self.lr)
 
         loss = self.func(self.x, self.y)

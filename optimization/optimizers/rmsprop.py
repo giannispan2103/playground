@@ -3,12 +3,14 @@ from utils import rmsprop_step
 
 
 class RMSProp(Optimizer):
-    def __init__(self, iterations: int,
-                 init_x: float, init_y: float,
+    def __init__(self,
+                 iterations: int,
+                 init_x: float,
+                 init_y: float,
                  func: callable,
                  gamma: float,
                  lr: float,
-                 epsilon: float = 0.00000001) -> None:
+                 epsilon: float) -> None:
         super(RMSProp, self).__init__(iterations=iterations, init_x=init_x, init_y=init_y, func=func, lr=lr)
         self.epsilon = epsilon
         self.gamma = gamma

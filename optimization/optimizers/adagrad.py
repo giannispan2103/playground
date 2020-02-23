@@ -3,11 +3,18 @@ from utils import adagrad_step
 
 
 class Adagrad(Optimizer):
-    def __init__(self, iterations: int,
-                 init_x: float, init_y: float,
+    def __init__(self,
+                 iterations: int,
+                 init_x: float,
+                 init_y: float,
                  func: callable,
-                 lr: float, epsilon: float = 0.00000001) -> None:
-        super(Adagrad, self).__init__(iterations=iterations, init_x=init_x, init_y=init_y, func=func, lr=lr)
+                 lr: float,
+                 epsilon: float) -> None:
+        super(Adagrad, self).__init__(iterations=iterations,
+                                      init_x=init_x,
+                                      init_y=init_y,
+                                      func=func,
+                                      lr=lr)
         self.epsilon = epsilon
         self.dx = 0.0
         self.dy = 0.0
