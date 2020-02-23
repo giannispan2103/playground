@@ -25,7 +25,7 @@ class Adagrad(Optimizer):
         self.x, self.y, self.dx, self.dy = adagrad_step(func=self.func, x=self.x, y=self.y,
                                                         dx_history=self.dx_history,
                                                         dy_history=self.dy_history,
-                                                        epsilon=self.epsilon)
+                                                        epsilon=self.epsilon, lr=self.lr)
 
         self.x_values.append(self.x)
         self.y_values.append(self.y)

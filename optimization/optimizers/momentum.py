@@ -20,8 +20,10 @@ class Momentum(Optimizer):
         self.nesterov = nesterov
 
     def step(self) -> None:
-        self.x, self.y, self.vx, self.vy = momentum_step(func=self.func, x=self.x, y=self.y, vx=self.vx,
-                                                         vy=self.vy, gamma=self.gamma, nesterov=self.nesterov)
+        self.x, self.y, self.vx, self.vy = momentum_step(func=self.func,
+                                                         x=self.x, y=self.y, vx=self.vx,
+                                                         vy=self.vy, gamma=self.gamma,
+                                                         nesterov=self.nesterov, lr=self.lr)
         self.x_values.append(self.x)
         self.y_values.append(self.y)
         loss = self.func(self.x, self.y)
