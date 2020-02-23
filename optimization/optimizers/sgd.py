@@ -7,7 +7,7 @@ class SGD(Optimizer):
         super(SGD, self).__init__(iterations, init_x, init_y, func, lr)
 
     def step(self) -> None:
-        self.x, self.y = sgd_step(self.func, self.x, self.y)
+        self.x, self.y = sgd_step(self.func, self.x, self.y, lr=self.lr)
         self.x_values.append(self.x)
         self.y_values.append(self.y)
         loss = self.func(self.x, self.y)
