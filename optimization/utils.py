@@ -2,7 +2,7 @@ from config import LR
 import numpy as np
 
 
-def get_numerical_gradients(func:callable, x: float, y: float, e: float=0.000000001) -> tuple:
+def get_numerical_gradients(func: callable, x: float, y: float, e: float=0.000000001) -> tuple:
     return (func(x+e, y) - func(x-e, y)) / (2*e),  (func(x, y+e) - func(x, y-e)) / (2*e)
 
 
@@ -45,9 +45,9 @@ def adagrad_step(func: callable,
 
 def adadelta_step(func: callable,
                   x: float, y: float,
-                  dx_ma:float, dy_ma: float, x_ma:float, y_ma:float,gamma:float,
+                  dx_ma:float, dy_ma: float, x_ma: float, y_ma: float,gamma:float,
                   lr:float,
-                  epsilon:float=0.0001):
+                  epsilon:float=0.0001) -> tuple:
     dx, dy = get_numerical_gradients(func, x, y)
     dx_ma = (1-gamma) * dx**2 + gamma * dx_ma
     dy_ma = (1-gamma) * dy**2 + gamma * dy_ma
