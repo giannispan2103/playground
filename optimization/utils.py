@@ -39,12 +39,25 @@ def momentum_step(func: callable,
                   vx: float,
                   vy: float,
                   lr: float,
-                  gamma: float,
-                  nesterov: bool=False) -> tuple:
-    if nesterov:
-        dx, dy = get_numerical_gradients(func, x-gamma*vx, y-gamma*vy, E)
-    else:
-        dx, dy = get_numerical_gradients(func,x,y, E)
+                  gamma: float) -> tuple:
+
+    dx, dy = get_numerical_gradients(func,x,y, E)
+    vx = gamma * vx + lr * dx
+    vy = gamma * vy + lr * dy
+    x = x - vx
+    y = y - vy
+    return x, y, vx, vy
+
+
+def nesterov_step(func: callable,
+                  x: float,
+                  y: float,
+                  vx: float,
+                  vy: float,
+                  lr: float,
+                  gamma: float) -> tuple:
+
+    dx, dy = get_numerical_gradients(func, x-gamma*vx, y-gamma*vy, E)
     vx = gamma * vx + lr * dx
     vy = gamma * vy + lr * dy
     x = x - vx

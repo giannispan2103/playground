@@ -1,8 +1,8 @@
 from optimizers.optimizer import Optimizer
-from utils import momentum_step
+from utils import nesterov_step
 
 
-class Momentum(Optimizer):
+class Nesterov(Optimizer):
     def __init__(self,
                  iterations: int,
                  init_x: float,
@@ -10,7 +10,7 @@ class Momentum(Optimizer):
                  func: callable,
                  lr: float,
                  gamma: float) -> None:
-        super(Momentum, self).__init__(iterations=iterations, init_x=init_x, init_y=init_y, func=func, lr=lr)
+        super(Nesterov, self).__init__(iterations=iterations, init_x=init_x, init_y=init_y, func=func, lr=lr)
         self.gamma = gamma
         self.vx = 0.0
         self.vy = 0.0
@@ -18,7 +18,7 @@ class Momentum(Optimizer):
         self.vy_history = []
 
     def step(self) -> None:
-        self.x, self.y, self.vx, self.vy = momentum_step(func=self.func,
+        self.x, self.y, self.vx, self.vy = nesterov_step(func=self.func,
                                                          x=self.x, y=self.y, vx=self.vx,
                                                          vy=self.vy, gamma=self.gamma,
                                                          lr=self.lr)
