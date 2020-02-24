@@ -1,6 +1,6 @@
 from optimizers.optimizer import Optimizer
 from utils import adadelta_step
-from schedulers.scheduler import Scheduler
+from schedulers.vanilla import VanillaScheduler
 
 
 class Adadelta(Optimizer):
@@ -10,9 +10,12 @@ class Adadelta(Optimizer):
                  init_y: float,
                  func: callable,
                  gamma: float,
-                 epsilon: float,
-                 scheduler: Scheduler) -> None:
-        super(Adadelta, self).__init__(iterations=iterations, init_x=init_x, init_y=init_y, func=func, scheduler=scheduler)
+                 epsilon: float) -> None:
+        super(Adadelta, self).__init__(iterations=iterations,
+                                       init_x=init_x,
+                                       init_y=init_y,
+                                       func=func,
+                                       scheduler=VanillaScheduler(1.0))
         self.epsilon = epsilon
         self.gamma = gamma
         self.dx = 0.0
