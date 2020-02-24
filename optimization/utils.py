@@ -22,7 +22,7 @@ def get_cyclical_lr(max_lr: float,
                     min_lr: float,
                     step: int,
                     cycle_size: int) -> float:
-    return min_lr + (max_lr - min_lr) * np.cos(pi * float(step)/cycle_size)
+    return min_lr + (max_lr - min_lr) * np.sin(pi * float(step)/cycle_size)
 
 
 def sgd_step(func: callable,
