@@ -1,5 +1,6 @@
 from optimizers.optimizer import Optimizer
 from utils import adagrad_step
+from schedulers.scheduler import Scheduler
 
 
 class Adagrad(Optimizer):
@@ -8,13 +9,13 @@ class Adagrad(Optimizer):
                  init_x: float,
                  init_y: float,
                  func: callable,
-                 lr: float,
+                 scheduler: Scheduler,
                  epsilon: float) -> None:
         super(Adagrad, self).__init__(iterations=iterations,
                                       init_x=init_x,
                                       init_y=init_y,
                                       func=func,
-                                      lr=lr)
+                                      scheduler=scheduler)
         self.epsilon = epsilon
         self.dx = 0.0
         self.dy = 0.0
@@ -25,7 +26,7 @@ class Adagrad(Optimizer):
         self.x, self.y, self.dx, self.dy = adagrad_step(func=self.func, x=self.x, y=self.y,
                                                         dx_history=self.dx_history,
                                                         dy_history=self.dy_history,
-                                                        epsilon=self.epsilon, lr=self.lr)
+                                                        epsilon=self.epsilon, lr=self.scheduler.get_lr())
 
         self.x_values.append(self.x)
         self.y_values.append(self.y)
