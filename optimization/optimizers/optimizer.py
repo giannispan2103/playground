@@ -8,11 +8,9 @@ class Optimizer(object):
                  init_y: float,
                  func: callable,
                  scheduler: Scheduler) -> None:
-        self.init_x = init_x
-        self.init_y = init_y
         self.iterations = iterations
         self.func = func
-        self.f_values = [self.func(self.init_x, self.init_y)]
+        self.f_values = [self.func(init_x, init_y)]
         self.x_values = [init_x]
         self.y_values = [init_y]
         self.scheduler = scheduler

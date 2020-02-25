@@ -9,6 +9,3 @@ class VanillaScheduler(Scheduler):
 
     def get_lr(self) -> float:
         return self.init_lr
-
-    def update(self) -> None:
-        self.step += 1
