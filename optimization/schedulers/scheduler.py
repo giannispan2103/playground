@@ -4,7 +4,7 @@ class Scheduler(object):
         self.step = 1
 
     def get_lr(self) -> float:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     def update(self) -> None:
         self.step += 1

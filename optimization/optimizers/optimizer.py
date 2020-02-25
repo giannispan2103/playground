@@ -18,7 +18,7 @@ class Optimizer(object):
         self.y = init_y
 
     def step(self) -> None:
-        raise NotImplementedError
+        raise NotImplementedError()
 
     def simulate(self) -> None:
         for it in range(1, self.iterations + 1):
