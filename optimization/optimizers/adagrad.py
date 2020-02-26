@@ -23,10 +23,13 @@ class Adagrad(Optimizer):
         self.dy_history = []
 
     def step(self) -> None:
-        self.x, self.y, self.dx, self.dy = adagrad_step(func=self.func, x=self.x, y=self.y,
+        self.x, self.y, self.dx, self.dy = adagrad_step(func=self.func,
+                                                        x=self.x,
+                                                        y=self.y,
                                                         dx_history=self.dx_history,
                                                         dy_history=self.dy_history,
-                                                        epsilon=self.epsilon, lr=self.scheduler.get_lr())
+                                                        epsilon=self.epsilon,
+                                                        lr=self.scheduler.get_lr())
 
         self.x_values.append(self.x)
         self.y_values.append(self.y)

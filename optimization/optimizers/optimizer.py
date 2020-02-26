@@ -28,4 +28,7 @@ class Optimizer(object):
     def distance(self,
                  target_x: float,
                  target_y: float) -> float:
-        return get_distance(self.x, self.y, target_x, target_y)
+        return get_distance(x1=self.x,
+                            y1=self.y,
+                            x2=target_x,
+                            y2=target_y)

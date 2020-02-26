@@ -1,5 +1,6 @@
 class Scheduler(object):
-    def __init__(self, init_lr: float) -> None:
+    def __init__(self,
+                 init_lr: float) -> None:
         self.init_lr = init_lr
         self.step = 1
 

@@ -2,7 +2,10 @@ from schedulers.scheduler import Scheduler
 
 
 class ExpDecayScheduler(Scheduler):
-    def __init__(self, init_lr: float, decay_size: float, cycle_size: int):
+    def __init__(self,
+                 init_lr: float,
+                 decay_size: float,
+                 cycle_size: int):
         super(ExpDecayScheduler, self).__init__(init_lr)
         self.cycle_size = cycle_size
         self.decay_size = decay_size

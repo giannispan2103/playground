@@ -8,7 +8,7 @@ def get_numerical_gradients(func: callable,
                             x: float,
                             y: float,
                             e: float) -> tuple:
-    return (func(x+e, y) - func(x-e, y)) / (2*e),  (func(x, y+e) - func(x, y-e)) / (2*e)
+    return (func(x+e, y) - func(x-e, y)) / (2 * e),  (func(x, y+e) - func(x, y-e)) / (2 * e)
 
 
 def get_distance(x1: float,
@@ -41,7 +41,7 @@ def momentum_step(func: callable,
                   lr: float,
                   gamma: float) -> tuple:
 
-    dx, dy = get_numerical_gradients(func,x,y, E)
+    dx, dy = get_numerical_gradients(func, x, y, E)
     vx = gamma * vx + lr * dx
     vy = gamma * vy + lr * dy
     x = x - vx
@@ -92,8 +92,8 @@ def adadelta_step(func: callable,
     dx_ma = (1-gamma) * dx**2 + gamma * dx_ma
     dy_ma = (1-gamma) * dy**2 + gamma * dy_ma
 
-    x = x - lr * (np.sqrt(x_ma+epsilon) / np.sqrt(dx_ma+epsilon))*dx
-    y = y - lr * (np.sqrt(y_ma+epsilon) / np.sqrt(dy_ma+epsilon))*dy
+    x = x - lr * (np.sqrt(x_ma + epsilon) / np.sqrt(dx_ma + epsilon)) * dx
+    y = y - lr * (np.sqrt(y_ma + epsilon) / np.sqrt(dy_ma + epsilon)) * dy
     return x, y, dx, dy, dx_ma, dy_ma
 
 
@@ -106,8 +106,8 @@ def rmsprop_step(func: callable,
                  lr: float,
                  epsilon: float) -> tuple:
     dx, dy = get_numerical_gradients(func, x, y, E)
-    dx_ma = (1-gamma) * dx**2 + gamma * dx_ma
-    dy_ma = (1-gamma) * dy**2 + gamma * dy_ma
-    x = x - (lr / np.sqrt(dx_ma+epsilon))*dx
-    y = y - (lr/np.sqrt(dy_ma+epsilon))*dy
+    dx_ma = (1 - gamma) * dx**2 + gamma * dx_ma
+    dy_ma = (1 - gamma) * dy**2 + gamma * dy_ma
+    x = x - (lr / np.sqrt(dx_ma + epsilon))*dx
+    y = y - (lr / np.sqrt(dy_ma + epsilon))*dy
     return x, y, dx, dy, dx_ma, dy_ma

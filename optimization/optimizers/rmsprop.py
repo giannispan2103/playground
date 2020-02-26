@@ -2,6 +2,7 @@ from optimizers.optimizer import Optimizer
 from utils import rmsprop_step
 from schedulers.scheduler import Scheduler
 
+
 class RMSProp(Optimizer):
     def __init__(self,
                  iterations: int,
@@ -11,7 +12,10 @@ class RMSProp(Optimizer):
                  gamma: float,
                  scheduler: Scheduler,
                  epsilon: float) -> None:
-        super(RMSProp, self).__init__(iterations=iterations, init_x=init_x, init_y=init_y, func=func,
+        super(RMSProp, self).__init__(iterations=iterations,
+                                      init_x=init_x,
+                                      init_y=init_y,
+                                      func=func,
                                       scheduler=scheduler)
         self.epsilon = epsilon
         self.gamma = gamma
@@ -21,11 +25,14 @@ class RMSProp(Optimizer):
         self.dy_ma = 0.0
 
     def step(self) -> None:
-        self.x, self.y, self.dx, self.dy, self.dx_ma, self.dy_ma = rmsprop_step(func=self.func, x=self.x, y=self.y,
+        self.x, self.y, self.dx, self.dy, self.dx_ma, self.dy_ma = rmsprop_step(func=self.func,
+                                                                                x=self.x,
+                                                                                y=self.y,
                                                                                 dx_ma=self.dx_ma,
                                                                                 dy_ma=self.dy_ma,
                                                                                 lr=self.scheduler.get_lr(),
-                                                                                epsilon=self.epsilon, gamma=self.gamma)
+                                                                                epsilon=self.epsilon,
+                                                                                gamma=self.gamma)
         self.x_values.append(self.x)
         self.y_values.append(self.y)
         loss = self.func(self.x, self.y)

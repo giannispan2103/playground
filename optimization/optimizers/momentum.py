@@ -11,8 +11,11 @@ class Momentum(Optimizer):
                  func: callable,
                  scheduler: Scheduler,
                  gamma: float) -> None:
-        super(Momentum, self).__init__(iterations=iterations, init_x=init_x, init_y=init_y,
-                                       func=func, scheduler=scheduler)
+        super(Momentum, self).__init__(iterations=iterations,
+                                       init_x=init_x,
+                                       init_y=init_y,
+                                       func=func,
+                                       scheduler=scheduler)
         self.gamma = gamma
         self.vx = 0.0
         self.vy = 0.0
@@ -21,8 +24,11 @@ class Momentum(Optimizer):
 
     def step(self) -> None:
         self.x, self.y, self.vx, self.vy = momentum_step(func=self.func,
-                                                         x=self.x, y=self.y, vx=self.vx,
-                                                         vy=self.vy, gamma=self.gamma,
+                                                         x=self.x,
+                                                         y=self.y,
+                                                         vx=self.vx,
+                                                         vy=self.vy,
+                                                         gamma=self.gamma,
                                                          lr=self.scheduler.get_lr())
         self.x_values.append(self.x)
         self.y_values.append(self.y)

@@ -3,7 +3,10 @@ from utils import get_cyclical_lr
 
 
 class CLRScheduler(Scheduler):
-    def __init__(self, init_lr: float , max_lr: float, cycle_size: int):
+    def __init__(self,
+                 init_lr: float,
+                 max_lr: float,
+                 cycle_size: int):
         super(CLRScheduler, self).__init__(init_lr)
         self.cycle_size = cycle_size
         self.max_lr = max_lr
